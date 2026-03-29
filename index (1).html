@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zeel Modh — Android &amp; Flutter Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--surface:#111118;--surface2:#18181f;--accent:#00e5a0;--accent2:#7b6ef6;--text:#e8e8f0;--muted:#6b6b80;--border:rgba(255,255,255,0.07);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--accent);}
+.nav-links{display:flex;gap:2rem;}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:.8rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--text);}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:7rem 3rem 4rem;gap:4rem;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 70% at 70% 50%,rgba(0,229,160,.07),transparent 60%),radial-gradient(ellipse 40% 55% at 15% 80%,rgba(123,110,246,.08),transparent 55%);}
+.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:60px 60px;}
+.hero-left{position:relative;z-index:1;}
+.badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.25);color:var(--accent);padding:.3rem .85rem;border-radius:100px;font-size:.73rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:1.4rem;}
+.bdot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-family:'Syne',sans-serif;font-size:clamp(2.8rem,5.5vw,5rem);font-weight:800;line-height:1.0;letter-spacing:-.04em;margin-bottom:1.4rem;}
+.green{color:var(--accent);}
+.hero-desc{font-size:1rem;color:var(--muted);max-width:460px;line-height:1.85;margin-bottom:2.2rem;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-p{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#0a0a0f;padding:.75rem 1.6rem;border-radius:8px;font-weight:700;font-size:.875rem;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 0 28px rgba(0,229,160,.28);}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 0 42px rgba(0,229,160,.42);}
+.btn-g{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--border);color:var(--text);padding:.75rem 1.6rem;border-radius:8px;font-weight:500;font-size:.875rem;text-decoration:none;transition:border-color .2s,background .2s;}
+.btn-g:hover{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.04);}
+.hero-right{position:relative;z-index:1;display:flex;flex-direction:column;gap:1.2rem;}
+.hcard{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.75rem;position:relative;overflow:hidden;}
+.hcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+.ptop{display:flex;align-items:center;gap:1rem;margin-bottom:1.4rem;}
+.av{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:#0a0a0f;flex-shrink:0;}
+.pname{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;}
+.prole{font-size:.78rem;color:var(--muted);margin-top:.15rem;}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;}
+.stat{background:var(--surface2);border-radius:10px;padding:.85rem;text-align:center;}
+.sn{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--accent);}
+.sl{font-size:.7rem;color:var(--muted);margin-top:.15rem;}
+.cstack{display:flex;flex-direction:column;gap:.5rem;}
+.cpill{display:flex;align-items:center;gap:.7rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.65rem 1rem;font-size:.83rem;color:var(--muted);text-decoration:none;transition:color .2s,border-color .2s;}
+.cpill:hover{color:var(--text);border-color:rgba(255,255,255,.15);}
+.ci{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;}
+.divider{height:1px;background:var(--border);}
+.section{padding:5.5rem 3rem;max-width:1200px;margin:0 auto;}
+.slabel{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem;display:block;}
+.stitle{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.7rem,3vw,2.6rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:2.8rem;}
+.timeline{padding-left:1.8rem;border-left:1px solid rgba(0,229,160,.3);}
+.tl-item{position:relative;margin-bottom:2.8rem;padding-bottom:2.8rem;border-bottom:1px solid var(--border);}
+.tl-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.tl-dot{position:absolute;left:-2.25rem;top:.4rem;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px rgba(0,229,160,.6);}
+.tl-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.3rem;}
+.tl-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;}
+.tl-period{background:rgba(0,229,160,.1);color:var(--accent);padding:.22rem .7rem;border-radius:100px;font-size:.75rem;font-weight:600;white-space:nowrap;}
+.tl-company{color:var(--muted);font-size:.875rem;margin-bottom:.8rem;}
+.tl-desc{font-size:.875rem;color:var(--muted);line-height:1.8;}
+.sec-badge{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .85rem;border-radius:100px;margin-bottom:1.25rem;}
+.sbg{color:var(--accent);background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.2);}
+.sbp{color:var(--accent2);background:rgba(123,110,246,.1);border:1px solid rgba(123,110,246,.2);}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.25rem;margin-bottom:3rem;}
+.pgrid:last-child{margin-bottom:0;}
+.pc{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem;display:flex;flex-direction:column;transition:transform .22s,border-color .22s,box-shadow .22s;}
+.pc:hover{transform:translateY(-4px);border-color:rgba(0,229,160,.22);box-shadow:0 18px 40px rgba(0,0,0,.3);}
+.ptag{display:inline-block;font-size:.67rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.2rem .6rem;border-radius:4px;margin-bottom:.65rem;width:fit-content;}
+.tj{background:rgba(255,107,107,.15);color:#ff8080;}
+.tk{background:rgba(123,110,246,.18);color:#9d93f8;}
+.tf{background:rgba(0,229,160,.13);color:var(--accent);}
+.tkj{background:rgba(250,204,21,.13);color:#facc15;}
+.tkr{background:rgba(99,179,237,.15);color:#63b3ed;}
+.tjr{background:rgba(252,129,74,.15);color:#fc814a;}
+.pbadge{display:inline-block;font-size:.68rem;color:var(--muted);background:var(--surface2);padding:.18rem .55rem;border-radius:4px;margin-bottom:.65rem;}
+.pname{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;margin-bottom:.5rem;}
+.pdesc{font-size:.83rem;color:var(--muted);line-height:1.75;flex:1;margin-bottom:1rem;}
+.plink{display:inline-flex;align-items:center;gap:.45rem;font-size:.78rem;color:var(--accent);text-decoration:none;font-weight:600;margin-top:auto;transition:gap .18s;}
+.plink:hover{gap:.7rem;}
+.psi{width:13px;height:13px;flex-shrink:0;}
+.skills-box{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2.5rem;}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2rem;}
+.sgt{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.85rem;}
+.pills{display:flex;flex-wrap:wrap;gap:.45rem;}
+.pill{background:var(--surface2);border:1px solid var(--border);padding:.35rem .8rem;border-radius:7px;font-size:.8rem;font-weight:500;color:var(--text);transition:border-color .2s,color .2s;}
+.pill:hover{border-color:rgba(0,229,160,.45);color:var(--accent);}
+.ec-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.ec-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.6rem;}
+.ec-head{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:1.2rem;}
+.ec-item{margin-bottom:1.3rem;padding-bottom:1.3rem;border-bottom:1px solid var(--border);}
+.ec-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.ec-deg{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:.2rem;}
+.ec-sch{font-size:.82rem;color:var(--muted);}
+.ec-yr{font-size:.75rem;color:var(--accent);margin-top:.25rem;}
+.lpills{display:flex;gap:.75rem;flex-wrap:wrap;}
+.lpill{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.45rem 1.1rem;font-size:.85rem;font-weight:500;}
+.hpills{display:flex;flex-wrap:wrap;gap:.6rem;}
+.hpill{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.4rem .85rem;font-size:.8rem;color:var(--muted);}
+.cta{background:var(--surface);border-radius:20px;margin:0 3rem 5rem;padding:5rem 3rem;text-align:center;position:relative;overflow:hidden;}
+.cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 55% at 50% 50%,rgba(0,229,160,.055),transparent);pointer-events:none;}
+.cta-sub{color:var(--muted);max-width:440px;margin:0 auto 2.2rem;}
+.clinks{display:flex;justify-content:center;flex-wrap:wrap;gap:.85rem;position:relative;z-index:1;}
+.clink{display:flex;align-items:center;gap:.7rem;background:var(--surface2);border:1px solid var(--border);padding:.8rem 1.4rem;border-radius:11px;text-decoration:none;color:var(--text);font-size:.875rem;transition:border-color .2s,transform .2s;}
+.clink:hover{border-color:rgba(0,229,160,.3);transform:translateY(-2px);}
+footer{text-align:center;padding:1.8rem;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border);}
+@media(max-width:900px){
+  nav{padding:1rem 1.25rem;}.nav-links{display:none;}
+  .hero{grid-template-columns:1fr;padding:6.5rem 1.25rem 3rem;gap:2.5rem;}.hero-right{order:-1;}
+  .section{padding:4rem 1.25rem;}.pgrid{grid-template-columns:1fr;}
+  .ec-grid{grid-template-columns:1fr;}.cta{margin:0 1.25rem 4rem;padding:3rem 1.25rem;}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-logo">ZM</div>
+  <div class="nav-links">
+    <a href="#experience">Experience</a><a href="#projects">Projects</a>
+    <a href="#skills">Skills</a><a href="#education">Education</a><a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="hero-left">
+    <div class="badge"><span class="bdot"></span>Open to Opportunities</div>
+    <h1>Zeel<br><span class="green">Modh.</span></h1>
+    <p class="hero-desc">Android &amp; Flutter mobile developer with 4+ years delivering high-performance apps across agri-tech, fintech, healthcare, security and social platforms. Java &middot; Kotlin &middot; Flutter.</p>
+    <div class="hero-btns">
+      <a id="hero-email-btn" href="#" class="btn-p">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        Get in Touch
+      </a>
+      <a href="https://www.linkedin.com/in/zeel-modh-48b993217" target="_blank" class="btn-g">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hcard">
+      <div class="ptop">
+        <div class="av">ZM</div>
+        <div><div class="pname">Zeel Modh</div><div class="prole">Android / Flutter Developer</div></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="sn">4+</div><div class="sl">Yrs Exp.</div></div>
+        <div class="stat"><div class="sn">18+</div><div class="sl">Projects</div></div>
+        <div class="stat"><div class="sn">600K+</div><div class="sl">Downloads</div></div>
+      </div>
+    </div>
+    <div class="cstack">
+      <a class="cpill" href="tel:+918155849137"><div class="ci" style="background:rgba(0,229,160,.1)">&#128222;</div>+91 8155849137</a>
+      <a class="cpill" id="cpill-email-btn" href="#"><div class="ci" style="background:rgba(123,110,246,.1)">&#9993;&#65039;</div>zeelmodh12@gmail.com</a>
+      <div class="cpill"><div class="ci" style="background:rgba(255,107,107,.1)">&#128205;</div>Vadodara, Gujarat, India</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<section class="section" id="experience">
+  <span class="slabel">Work History</span>
+  <div class="stitle">Experience</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-head"><div class="tl-title">Android / Flutter Mobile Application Developer</div><div class="tl-period">May 2025 &ndash; Present</div></div>
+      <div class="tl-company">Redspark Technologies LLP &mdash; Vadodara</div>
+      <div class="tl-desc">Building cross-platform mobile apps across diverse domains &mdash; call/site blocking (BGB), service professional platform (Mehanii), medical marketplace (Calm Medical), gaming scoreboard (Goalactico), and fitness social media (3FitStyle). Delivering production-ready Flutter, Kotlin and Java features with complex UI and real-time integrations.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-head"><div class="tl-title">Jr. Android Mobile Application Developer</div><div class="tl-period">Jan 2022 &ndash; May 2025</div></div>
+      <div class="tl-company">Rydot Infotech Pvt. Ltd &mdash; Ahmedabad</div>
+      <div class="tl-desc">Developed and maintained 13+ production Android apps using Java, Kotlin, and Flutter across agri-tech, fintech, security communications, digital signage, and attendance management. Multiple apps surpassed 100K+ Play Store installs with one reaching 500K+ downloads.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section" id="projects">
+  <span class="slabel">Work</span>
+  <div class="stitle">All 18 Projects</div>
+
+  <div class="sec-badge sbp">Redspark Technologies LLP</div>
+  <div class="pgrid">
+    <div class="pc">
+      <div class="ptag tk">Kotlin</div>
+      <div class="pname">BGB</div>
+      <p class="pdesc">Controls usage of unwanted sites and apps &mdash; blocks incoming calls, messages, websites and applications with usage overview of all blocked items. Multiple subscription packages for better UX and revenue model. Multi-language support (English &amp; Turkish). Works like Truecaller with more advanced features.</p>
+      <a href="https://play.google.com/store/apps/details?id=net.bgbapp.app" target="_blank" class="plink"><svg class="psi" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2 2 0 0 0 2.05-.15l13.6-7.85-3.48-3.48-12.17 11.48zM.12 1.28A2 2 0 0 0 0 2v20a2 2 0 0 0 .12.72l.07.07 11.2-11.2v-.26L.19 1.21l-.07.07zm21.56 9.4-3.03-1.75-3.8 3.8 3.8 3.8 3.06-1.77a2 2 0 0 0 0-4.08zm-17.49 9.4 12.17-11.48-3.48-3.48L.19 17.5l.07.07z"/></svg>Play Store</a>
+    </div>
+    <div class="pc">
+      <div class="ptag tf">Flutter</div>
+      <div class="pname">Mehanii</div>
+      <p class="pdesc">Digital platform for service professionals &mdash; real-time job notifications by location/skills/availability, unified calendar with integrated maps, performance analytics (completion rates, ratings, earnings), automated invoicing, secure payments, structured onboarding, and bilingual Arabic&ndash;English interface.</p>
+      <a href="https://play.google.com/store/apps/details?id=com.oceantech.mehanii_service_provider" target="_blank" class="plink"><svg class="psi" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2 2 0 0 0 2.05-.15l13.6-7.85-3.48-3.48-12.17 11.48zM.12 1.28A2 2 0 0 0 0 2v20a2 2 0 0 0 .12.72l.07.07 11.2-11.2v-.26L.19 1.21l-.07.07zm21.56 9.4-3.03-1.75-3.8 3.8 3.8 3.8 3.06-1.77a2 2 0 0 0 0-4.08zm-17.49 9.4 12.17-11.48-3.48-3.48L.19 17.5l.07.07z"/></svg>Play Store</a>
+    </div>
+    <div class="pc">
+      <div class="ptag tf">Flutter</div>
+      <div class="pname">Calm Medical</div>
+      <p class="pdesc">Medical platform for browsing products/services at nearby stores, online purchasing, specialist appointment booking, coupon redemption, flash sales, personalised birthday-based offers, and user-type based flow for store managers (orders, bookings, deliveries via push notifications). Multi-language: Chinese &amp; English.</p>
+    </div>
+    <div class="pc">
+      <div class="ptag tk">Kotlin</div>
+      <div class="pname">Goalactico</div>
+      <p class="pdesc">Gaming scoreboard for browsing upcoming games, tournaments, events and posts by players. Contributed dynamic scoreboard with unique point-table UI, game timeline for scores and in-game events, penalty tracking, custom local timer logic, plus UI optimisations and bug fixes.</p>
+      <a href="https://play.google.com/store/apps/details?id=com.sportx.goalactico" target="_blank" class="plink"><svg class="psi" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2 2 0 0 0 2.05-.15l13.6-7.85-3.48-3.48-12.17 11.48zM.12 1.28A2 2 0 0 0 0 2v20a2 2 0 0 0 .12.72l.07.07 11.2-11.2v-.26L.19 1.21l-.07.07zm21.56 9.4-3.03-1.75-3.8 3.8 3.8 3.8 3.06-1.77a2 2 0 0 0 0-4.08zm-17.49 9.4 12.17-11.48-3.48-3.48L.19 17.5l.07.07z"/></svg>Play Store</a>
+    </div>
+    <div class="pc">
+      <div class="ptag tk">Kotlin</div>
+      <div class="pname">3FitStyle (Dovis)</div>
+      <p class="pdesc">Fitness social media with in-app purchases. Developed community feeds module &mdash; Instagram-style posts, workout &amp; diet plans, progressive posts, dynamic access control for admin and community creators, and community package purchasing (donation, plan purchase, full app package).</p>
+      <a href="https://play.google.com/store/apps/details?id=com.threefitstyle" target="_blank" class="plink"><svg class="psi" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2 2 0 0 0 2.05-.15l13.6-7.85-3.48-3.48-12.17 11.48zM.12 1.28A2 2 0 0 0 0 2v20a2 2 0 0 0 .12.72l.07.07 11.2-11.2v-.26L.19 1.21l-.07.07zm21.56 9.4-3.03-1.75-3.8 3.8 3.8 3.8 3.06-1.77a2 2 0 0 0 0-4.08zm-17.49 9.4 12.17-11.48-3.48-3.48L.19 17.5l.07.07z"/></svg>Play Store</a>
+    </div>
+  </div>
+
+  <div class="sec-badge sbg">Rydot Infotech Pvt. Ltd</div>
+  <div class="pgrid">
+    <div class="pc">
+      <div class="ptag tk">Kotlin</div>
+      <div class="pbadge">&#128241; 500K+ Downloads</div>
+      <div class="pname">Divine Talk</div>
+      <p class="pdesc">Astrology consultation app &mdash; video calls, chats, audio calls, and live streams with astrologers. Pixel-perfect UI for all devices, socket-based real-time online/offline status, redesigned dashboards, chats, shops, and live user listings. Built with fragments, ViewModels and LiveData.</p>
+      <a href="https://play.google.com/store/apps/details?id=app.divine" target="_blank" class="plink"><svg class="psi" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2 2 0 0 0 2.05-.15l13.6-7.85-3.48-3.48-12.17 11.48zM.12 1.28A2 2 0 0 0 0 2v20a2 2 0 0 0 .12.72l.07.07 11.2-11.2v-.26L.19 1.21l-.07.07zm21.56 9.4-3.03-1.75-3.8 3.8 3.8 3.8 3.06-1.77a2 2 0 0 0 0-4.08zm-17.49 9.4 12.17-11.48-3.48-3.48L.19 17.5l.07.07z"/></svg>Play Store</a>
+    </div>
+    <div class="pc">
+      <div class="ptag tkj">Kotlin + Java</div>
+      <div class="pbadge">&#128241; 100K+ Downloads</div>
+      <div class="pname">Adama Farmer Reach</div>
+      <p class="pdesc">Farming app addressing agricultural challenges &mdash; offline/online product browsing, weather forecasting, location-based dealer finding, expert Q&amp;A, product suggestions, reward points, and user surveys. Firebase Analytics &amp; Crashlytics for tracking and error reporting.</p>
+      <a href="https://play.google.com/store/apps/details?id=com.adamaapp" target="_blank" class="plink"><svg class="psi" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2 2 0 0 0 2.05-.15l13.6-7.85-3.48-3.48-12.17 11.48zM.12 1.28A2 2 0 0 0 0 2v20a2 2 0 0 0 .12.72l.07.07 11.2-11.2v-.26L.19 1.21l-.07.07zm21.56 9.4-3.03-1.75-3.8 3.8 3.8 3.8 3.06-1.77a2 2 0 0 0 0-4.08zm-17.49 9.4 12.17-11.48-3.48-3.48L.19 17.5l.07.07z"/></svg>Play Store</a>
+    </div>
+    <div class="pc">
+      <div class="ptag tj">Java</div>
+      <div class="pbadge">&#128101; 10K+ Internal Users</div>
+      <div class="pname">ADAMA Sampark</div>
+      <p class="pdesc">Farmer data management &mdash; smart forms with dropdown menus, API auto-populated data, no-duplicate-entry validation, 10-second GPS location accuracy updates, optimised offline data storage, and force/soft update mechanisms.</p>
+      <a href="https://play.google.com/store/apps/details?id=com.fafmo.adama" target="_blank" class="plink"><svg class="psi" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2 2 0 0 0 2.05-.15l13.6-7.85-3.48-3.48-12.17 11.48zM.12 1.28A2 2 0 0 0 0 2v20a2 2 0 0 0 .12.72l.07.07 11.2-11.2v-.26L.19 1.21l-.07.07zm21.56 9.4-3.03-1.75-3.8 3.8 3.8 3.8 3.06-1.77a2 2 0 0 0 0-4.08zm-17.49 9.4 12.17-11.48-3.48-3.48L.19 17.5l.07.07z"/></svg>Play Store</a>
+    </div>
+    <div class="pc">
+      <div class="ptag tk">Kotlin</div>
+      <div class="pname">P2T (Push to Talk)</div>
+      <p class="pdesc">Communication platform for security agencies &mdash; Agora RTM &amp; RTC libraries for real-time audio/video calls, group chats, and SOS features. Includes GPS tracking, user authentication, and a responsive dashboard.</p>
+    </div>
+    <div class="pc">
+      <div class="ptag tj">Java</div>
+      <div class="pname">Digital Walls</div>
+      <p class="pdesc">Content management for digital signage &mdash; auto-shutdown after ad playlist, 4-min content refresh, offline scheduled ad playback from central CMS, YouTube API integration, animation/scrolling/RSS bug fixes, and 6-digit code for secure device onboarding.</p>
+      <a href="https://play.google.com/store/apps/details?id=com.rydot.digitalwalls" target="_blank" class="plink"><svg class="psi" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2 2 0 0 0 2.05-.15l13.6-7.85-3.48-3.48-12.17 11.48zM.12 1.28A2 2 0 0 0 0 2v20a2 2 0 0 0 .12.72l.07.07 11.2-11.2v-.26L.19 1.21l-.07.07zm21.56 9.4-3.03-1.75-3.8 3.8 3.8 3.8 3.06-1.77a2 2 0 0 0 0-4.08zm-17.49 9.4 12.17-11.48-3.48-3.48L.19 17.5l.07.07z"/></svg>Play Store</a>
+    </div>
+    <div class="pc">
+      <div class="ptag tjr">Java + React Native</div>
+      <div class="pname">TurnoutK</div>
+      <p class="pdesc">Facial recognition attendance &mdash; offline/online AI models, IoT Bluetooth integration for real-time face recognition and registration, React Native native camera components, incremental data sync, TensorFlow &amp; third-party SDKs, LED status indicators for R&amp;D.</p>
+      <a href="https://play.google.com/store/apps/details?id=com.rydotinfotech.turnout" target="_blank" class="plink"><svg class="psi" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2 2 0 0 0 2.05-.15l13.6-7.85-3.48-3.48-12.17 11.48zM.12 1.28A2 2 0 0 0 0 2v20a2 2 0 0 0 .12.72l.07.07 11.2-11.2v-.26L.19 1.21l-.07.07zm21.56 9.4-3.03-1.75-3.8 3.8 3.8 3.8 3.06-1.77a2 2 0 0 0 0-4.08zm-17.49 9.4 12.17-11.48-3.48-3.48L.19 17.5l.07.07z"/></svg>Play Store</a>
+    </div>
+    <div class="pc">
+      <div class="ptag tkr">Kotlin + React Native</div>
+      <div class="pname">TurnoutM</div>
+      <p class="pdesc">Cross-platform employee attendance tool &mdash; native components for dynamic background API calls, delivering responses to React Native side to circumvent built-in HTTP client limitations for smooth backend communication.</p>
+    </div>
+    <div class="pc">
+      <div class="ptag tkj">Kotlin + Java</div>
+      <div class="pname">Adama Dealer Khata</div>
+      <p class="pdesc">Self-service dealer app &mdash; customer ledger for transactions, download tax invoices/vouchers/statements, loyalty QR scanning for reward points, product/combo scheme recommendations via external APIs integrated using native React Native components.</p>
+      <a href="https://play.google.com/store/apps/details?id=com.adamadealerapp" target="_blank" class="plink"><svg class="psi" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2 2 0 0 0 2.05-.15l13.6-7.85-3.48-3.48-12.17 11.48zM.12 1.28A2 2 0 0 0 0 2v20a2 2 0 0 0 .12.72l.07.07 11.2-11.2v-.26L.19 1.21l-.07.07zm21.56 9.4-3.03-1.75-3.8 3.8 3.8 3.8 3.06-1.77a2 2 0 0 0 0-4.08zm-17.49 9.4 12.17-11.48-3.48-3.48L.19 17.5l.07.07z"/></svg>Play Store</a>
+    </div>
+    <div class="pc">
+      <div class="ptag tj">Java</div>
+      <div class="pname">Adama Expense</div>
+      <p class="pdesc">Employee expense management &mdash; log travel, hotel, and daily allowances; access field-submitted history; manager approve/reject workflow; monthly analytics for claims submitted, approved, pending, and averages for employees and managers.</p>
+      <a href="https://play.google.com/store/apps/details?id=com.adama.expenseapp" target="_blank" class="plink"><svg class="psi" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2 2 0 0 0 2.05-.15l13.6-7.85-3.48-3.48-12.17 11.48zM.12 1.28A2 2 0 0 0 0 2v20a2 2 0 0 0 .12.72l.07.07 11.2-11.2v-.26L.19 1.21l-.07.07zm21.56 9.4-3.03-1.75-3.8 3.8 3.8 3.8 3.06-1.77a2 2 0 0 0 0-4.08zm-17.49 9.4 12.17-11.48-3.48-3.48L.19 17.5l.07.07z"/></svg>Play Store</a>
+    </div>
+    <div class="pc">
+      <div class="ptag tkj">Kotlin + Java</div>
+      <div class="pname">Assistant Chatbot SDK</div>
+      <p class="pdesc">High-performance chatbot SDK surpassing WhatsApp capabilities &mdash; customisable SDK for native Android with dynamic UI elements (themes, buttons, text colors). WebSocket-powered real-time typing indicators, online/offline status, and live chat.</p>
+    </div>
+    <div class="pc">
+      <div class="ptag tj">Java</div>
+      <div class="pname">Adama CIMS</div>
+      <p class="pdesc">Java-based web application for chemical inventory management &mdash; view and manage inventory in-browser, download CMS-generated reports as CSV files, user-friendly interface for efficient chemical inventory operations.</p>
+    </div>
+    <div class="pc">
+      <div class="ptag tk">Kotlin</div>
+      <div class="pname">Radiant Configuration App</div>
+      <p class="pdesc">Kotlin app facilitating Bluetooth communication with IoT devices &mdash; enables data transfer over Wi-Fi for seamless remote device configuration and connectivity management.</p>
+    </div>
+    <div class="pc">
+      <div class="ptag tf">Flutter</div>
+      <div class="pname">Kora MTM</div>
+      <p class="pdesc">Flutter inventory management for store staff &mdash; product filtering by fabric, design, or color code; order creation via manual input or barcode scanning; order tracking; and user profile management.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section" id="skills">
+  <span class="slabel">Toolkit</span>
+  <div class="stitle">Skills &amp; Technologies</div>
+  <div class="skills-box">
+    <div class="sgrid">
+      <div><div class="sgt">Languages</div><div class="pills"><span class="pill">Java</span><span class="pill">Kotlin</span><span class="pill">Dart</span></div></div>
+      <div><div class="sgt">Frameworks</div><div class="pills"><span class="pill">Android SDK</span><span class="pill">Flutter</span><span class="pill">React Native (Basic)</span></div></div>
+      <div><div class="sgt">Architecture</div><div class="pills"><span class="pill">MVVM</span><span class="pill">ViewModel</span><span class="pill">LiveData</span><span class="pill">Jetpack Compose (Basic)</span></div></div>
+      <div><div class="sgt">Networking</div><div class="pills"><span class="pill">Retrofit</span><span class="pill">Volley</span><span class="pill">Socket.IO</span><span class="pill">Agora RTC/RTM</span><span class="pill">WebSockets</span></div></div>
+      <div><div class="sgt">Storage</div><div class="pills"><span class="pill">Room DB</span><span class="pill">Firebase</span><span class="pill">Offline Storage</span></div></div>
+      <div><div class="sgt">Tools</div><div class="pills"><span class="pill">GitHub</span><span class="pill">Firebase Console</span><span class="pill">TensorFlow</span><span class="pill">Material Design</span><span class="pill">App Publishing</span></div></div>
+      <div><div class="sgt">Design</div><div class="pills"><span class="pill">Adobe XD</span><span class="pill">Figma</span><span class="pill">UI/UX Design</span></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section" id="education">
+  <span class="slabel">Background</span>
+  <div class="stitle">Education &amp; Certifications</div>
+  <div class="ec-grid">
+    <div class="ec-card">
+      <div class="ec-head">&#127891; Education</div>
+      <div class="ec-item"><div class="ec-deg">B.Tech &mdash; Information Technology</div><div class="ec-sch">U.V. Patel College of Engineering, Ganpat University</div><div class="ec-yr">2022 &middot; CGPA 7.84</div></div>
+      <div class="ec-item"><div class="ec-deg">HSC (Class 12)</div><div class="ec-sch">GSHEB</div><div class="ec-yr">2018 &middot; 61.10%</div></div>
+    </div>
+    <div class="ec-card">
+      <div class="ec-head">&#128221; Certifications</div>
+      <div class="ec-item"><div class="ec-deg">Android App Development Master Course</div><div class="ec-sch">Udemy &middot; Java &amp; Android</div></div>
+      <div class="ec-item"><div class="ec-deg">The Complete Android Kotlin Developer Course</div><div class="ec-sch">Udemy</div></div>
+      <div class="ec-item"><div class="ec-deg">Introduction to Flutter Course</div><div class="ec-sch">Simplilearn / SkillUp</div></div>
+    </div>
+  </div>
+  <div class="ec-grid" style="margin-top:1.5rem;">
+    <div class="ec-card">
+      <div class="ec-head">&#127760; Languages</div>
+      <div class="lpills"><span class="lpill">English</span><span class="lpill">Gujarati</span><span class="lpill">Hindi</span></div>
+    </div>
+    <div class="ec-card">
+      <div class="ec-head">&#127919; Hobbies</div>
+      <div class="hpills">
+        <span class="hpill">&#128218; Knowledge Gathering</span>
+        <span class="hpill">&#128170; Gyming</span>
+        <span class="hpill">&#127925; Listen Music</span>
+        <span class="hpill">&#127952; Volleyball</span>
+        <span class="hpill">&#9992;&#65039; Travelling</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta" id="contact">
+  <span class="slabel" style="display:block;margin-bottom:.6rem;position:relative;z-index:1;">Get In Touch</span>
+  <div class="stitle" style="position:relative;z-index:1;margin-bottom:.8rem;">Let's build something<br>great together.</div>
+  <p class="cta-sub">Open to new opportunities, collaborations and interesting projects. Reach out anytime!</p>
+  <div class="clinks">
+    <a id="cta-email-btn" href="#" class="clink">&#9993;&#65039; zeelmodh12@gmail.com</a>
+    <a href="tel:+918155849137" class="clink">&#128222; +91 8155849137</a>
+    <a href="https://www.linkedin.com/in/zeel-modh-48b993217" target="_blank" class="clink">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
+</div>
+<footer>Designed for Zeel Modh &middot; Android &amp; Flutter Developer &middot; Vadodara, India</footer>
+
+<script>
+(function() {
+  var u = 'zeelmodh12';
+  var d = 'gmail.com';
+  var email = u + '@' + d;
+  var mailto = 'mailto:' + email;
+
+  var ids = ['hero-email-btn', 'cpill-email-btn', 'cta-email-btn'];
+  ids.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) {
+      el.href = mailto;
+      el.onclick = function(e) {
+        e.preventDefault();
+        window.location.href = mailto;
+      };
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
