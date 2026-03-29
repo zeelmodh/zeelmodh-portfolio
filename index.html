@@ -127,11 +127,11 @@ footer{text-align:center;padding:1.8rem;color:var(--muted);font-size:.8rem;borde
     <h1>Zeel<br><span class="green">Modh.</span></h1>
     <p class="hero-desc">Android &amp; Flutter mobile developer with 4+ years delivering high-performance apps across agri-tech, fintech, healthcare, security and social platforms. Java &middot; Kotlin &middot; Flutter.</p>
     <div class="hero-btns">
-      <a href="mailto:zeelmodh12@gmail.com" class="btn-p">
+      <a id="hero-email-btn" href="#" class="btn-p">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
         Get in Touch
       </a>
-      <a href="https://www.linkedin.com/in/zeelmodh-48b993217/" target="_blank" class="btn-g">
+      <a href="https://www.linkedin.com/in/zeel-modh-48b993217" target="_blank" class="btn-g">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         LinkedIn
       </a>
@@ -151,7 +151,7 @@ footer{text-align:center;padding:1.8rem;color:var(--muted);font-size:.8rem;borde
     </div>
     <div class="cstack">
       <a class="cpill" href="tel:+918155849137"><div class="ci" style="background:rgba(0,229,160,.1)">&#128222;</div>+91 8155849137</a>
-      <a class="cpill" href="mailto:zeelmodh12@gmail.com"><div class="ci" style="background:rgba(123,110,246,.1)">&#9993;&#65039;</div>zeelmodh12@gmail.com</a>
+      <a class="cpill" id="cpill-email-btn" href="#"><div class="ci" style="background:rgba(123,110,246,.1)">&#9993;&#65039;</div>zeelmodh12@gmail.com</a>
       <div class="cpill"><div class="ci" style="background:rgba(255,107,107,.1)">&#128205;</div>Vadodara, Gujarat, India</div>
     </div>
   </div>
@@ -356,15 +356,33 @@ footer{text-align:center;padding:1.8rem;color:var(--muted);font-size:.8rem;borde
   <div class="stitle" style="position:relative;z-index:1;margin-bottom:.8rem;">Let's build something<br>great together.</div>
   <p class="cta-sub">Open to new opportunities, collaborations and interesting projects. Reach out anytime!</p>
   <div class="clinks">
-    <a href="mailto:zeelmodh12@gmail.com" class="clink">&#9993;&#65039; zeelmodh12@gmail.com</a>
+    <a id="cta-email-btn" href="#" class="clink">&#9993;&#65039; zeelmodh12@gmail.com</a>
     <a href="tel:+918155849137" class="clink">&#128222; +91 8155849137</a>
-    <a href="https://www.linkedin.com/in/zeelmodh-48b993217/" target="_blank" class="clink">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-      LinkedIn
-    </a>
-  </div>
+    <a href="https://www.linkedin.com/in/zeel-modh-48b993217" target="_blank" class="clink">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
 </div>
-
 <footer>Designed for Zeel Modh &middot; Android &amp; Flutter Developer &middot; Vadodara, India</footer>
+
+<script>
+(function() {
+  var u = 'zeelmodh12';
+  var d = 'gmail.com';
+  var email = u + '@' + d;
+  var mailto = 'mailto:' + email;
+
+  var ids = ['hero-email-btn', 'cpill-email-btn', 'cta-email-btn'];
+  ids.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) {
+      el.href = mailto;
+      el.onclick = function(e) {
+        e.preventDefault();
+        window.location.href = mailto;
+      };
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
